@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-//by Can Sarı , Batuhan Arda Bekar
+//by Can SarÄ± , Batuhan Arda Bekar
 int main()
 {
     int a, b; // f(p) = a.p + b
