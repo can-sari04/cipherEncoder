@@ -3,38 +3,62 @@
 using namespace std;
 
 //by Can Sarı , Batuhan Arda Bekar
+
+//Cipher Decrypter Function
+void Decrypt(int a, int b, int* m, int* n)
+{
+	while ((a * (*m) - 1) % 26 != 0)
+		++*m;
+	while ((a * (*n) + b) % 26 != 0)
+		++*n;
+}
+
 int main()
 {
-    int a, b; // f(p) = a.p + b
+	int a = 0, b = 0; // f(p) = a.p + b
+	int m = 0, n = 0; // f^-1(p) = m.p + n
 
-    cout << "Enter a [ f(p) = a.p + b ] :";
-    cin >> a;
-    cout << "Enter b [ f(p) = a.p + b ] :";
-    cin >> b;
+	string text;
 
-    string text;
-    cout << "Enter Text: ";
-    cin >> text;
+	cout << "Decrypt Or Encrypt? (D / E) :";
+	cin >> text;
 
-    cout << '\n';
-    char alphabetIndex[26];
-    char cipherIndex[26];
+	cout << "Enter a [ f(p) = a.p + b ] :";
+	cin >> a;
+	cout << "Enter b [ f(p) = a.p + b ] :";
+	cin >> b;
 
-    for (int i = 65; i < 91; i++) {
+	if (text == "D")
+	{
+		Decrypt(a, b, &m, &n);
+		a = m;
+		b = n;
+	}
+	
 
-        alphabetIndex[i - 65] = i;
-        int temp = alphabetIndex[i - 65] - 65;
-        cipherIndex[i - 65] = (temp * a + b) % 26 + 65;
-    }
+	cout << "Enter Text: ";
+	cin >> text;
 
-    for (int i = 0; i < text.size(); i++)
-    {
-        text[i] = toupper(text[i]);
-        int temp = text[i] - 65;
-        for (int j = 0; j < 26; j++) {
-            if (temp == j)
-                cout << cipherIndex[j];
+	cout << '\n';
 
-        }
-    }
+	char alphabetIndex[26];
+	char cipherIndex[26];
+
+	for (int i = 65; i < 91; i++) {
+
+		alphabetIndex[i - 65] = i;
+		int temp = alphabetIndex[i - 65] - 65;
+		cipherIndex[i - 65] = (temp * a + b) % 26 + 65;
+	}
+
+	for (int i = 0; i < text.size(); i++)
+	{
+		text[i] = toupper(text[i]);
+		int temp = text[i] - 65;
+		for (int j = 0; j < 26; j++) {
+			if (temp == j)
+				cout << cipherIndex[j];
+
+		}
+	}
 }
